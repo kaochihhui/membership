@@ -16,16 +16,16 @@
   <div class="container-fluid">
     <div class="section-head">
         <div class="row">
-            <div class="colStyle col-6 col-lg-3">
-                <div class="grid">
+            <div class="colStyle col-6 col-lg-2 pl-0">
+                <div class="grid p-2">
                     <div><p>name of user</p></div>
                     <div><p>42</p></div>
                     <div><button type="button" class="btn btn-light">Ya Vi el Video</button></div>
                     
                 </div>
             </div>
-            <div class="colStyle col-6 col-lg-3">            
-                <div class="grid">
+            <div class="colStyle col-6 col-lg-2 p-0 pr-lg-3">            
+                <div class="grid p-2">
                     <div><p>TU HABITO</p></div>
                     <div class="radioBtn">
                         <div>
@@ -40,14 +40,14 @@
 
             <div class="w-100 d-lg-none row-space"></div>
 
-            <div class="colStyle col-6 col-lg-3">            
-                <div class="grid">
+            <div class="colStyle col-6 col-lg-2 pl-0">            
+                <div class="grid p-2">
                     <div><p>TU POSICION</p></div>
                     <div><p>78%</p></div>
                 </div>
             </div>
-            <div class="colStyle col-6 col-lg-3">            
-                <div class="grid">
+            <div class="colStyle col-6 col-lg-6 p-0">            
+                <div class="grid p-2">
                     <div><p>NUESTRA META</p></div>
                     <div class="row">
                         <div class="col-8">
