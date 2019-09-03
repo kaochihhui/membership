@@ -5,17 +5,23 @@
     text-align: center
 }
 .section-head .colStyle{
+    /* padding: 0; */
     background-color: #69a2b0
-    /* background-color: #90bac4 */
 }
-.section-head .col-2{
-    /* padding: 0 */
+.section-head .row-space{
+    height:10px;
+    background-color: #90bac4
 }
 .grid{
     /* background-color: #69a2b0 */
 }
 .radioBtn{
-    text-align: left
+    text-align: left;
+    display: flex;
+    /* flex-wrap: wrap; */
+    /* flex-direction: column; */
+    justify-content: center;
+    align-items:center;
 }
 .section-head .bg-success{
     background-color: #659157 !important

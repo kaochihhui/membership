@@ -28,15 +28,17 @@
                 <div class="grid">
                     <div><p>TU HABITO</p></div>
                     <div class="radioBtn">
-                        <input type="radio" name="habit" value="">  1 a 1<br>
-                        <input type="radio" name="habit" value="">  Calma <br>
-                        <input type="radio" name="habit" value="">  Eleccion
+                        <div>
+                        <div><input type="radio" name="habit" value=""> 1 a 1</div>
+                        <div><input type="radio" name="habit" value=""> Calma</div>
+                        <div><input type="radio" name="habit" value=""> Eleccion</div>
+                        </div>
                     </div>
                     <div class="d-none"><p><span>DaysInARow</span><span>9</span></p></div>
                 </div>
             </div>
 
-            <div class="w-100 d-lg-none d-xl-none"></div>
+            <div class="w-100 d-lg-none row-space"></div>
 
             <div class="colStyle col-6 col-lg-3">            
                 <div class="grid">
