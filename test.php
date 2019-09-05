@@ -16,7 +16,7 @@
   <div class="container-fluid">
     <div class="section-head">
         <div class="row">
-            <div class="colStyle col-6 col-lg-2 pl-0">
+            <div class="colStyle col-6 col-lg-3 pl-0">
                 <div class="grid p-2">
                     <div><p>name of user</p></div>
                     <div><p>42</p></div>
@@ -24,14 +24,14 @@
                     
                 </div>
             </div>
-            <div class="colStyle col-6 col-lg-2 p-0 pr-lg-3">            
+            <div class="colStyle col-6 col-lg-3 p-0 pr-lg-3">            
                 <div class="grid p-2">
                     <div><p>TU HABITO</p></div>
                     <div class="radioBtn">
                         <div>
-                        <div><input type="radio" name="habit" value=""> 1 a 1</div>
-                        <div><input type="radio" name="habit" value=""> Calma</div>
-                        <div><input type="radio" name="habit" value=""> Eleccion</div>
+                        <div><input id="1a1" type="radio" name="habit" value=""><label for="1a1">1 a 1</label></div>
+                        <div><input id="Calma" type="radio" name="habit" value=""><label for="Calma">Calma</label></div>
+                        <div><input id="Eleccion" type="radio" name="habit" value=""><label for="Eleccion">Eleccion</label> </div>
                         </div>
                     </div>
                     <div class="d-none"><p><span>DaysInARow</span><span>9</span></p></div>
@@ -40,24 +40,31 @@
 
             <div class="w-100 d-lg-none row-space"></div>
 
-            <div class="colStyle col-6 col-lg-2 pl-0">            
+            <div class="colStyle col-6 col-lg-3 pl-0">            
                 <div class="grid p-2">
                     <div><p>TU POSICION</p></div>
                     <div><p>78%</p></div>
+                    <div class="smileGroup">
+                        <div class="smile"><img src="./img/section-img/smile-regular.svg"></div>
+                        <div class="smile"><img src="./img/section-img/smile-regular.svg"></div>
+                        <div class="smile smileOpacity"><img src="./img/section-img/smile-regular.svg"></div>
+                    </div>
                 </div>
             </div>
-            <div class="colStyle col-6 col-lg-6 p-0">            
+            <div class="colStyle col-6 col-lg-3 p-0">            
                 <div class="grid p-2">
-                    <div><p>NUESTRA META</p></div>
-                    <div class="row">
+                    <div class="progHead">
+                        <div class="progTitle"><p>NUESTRA META</p></div>
+                        <div class="questionMark"><img src="./img/section-img/question-circle-regular.svg"></div>
+                    </div>
+                    
+                    <div class="row progBar">
                         <div class="col-8">
                             <div class="progress">
                                 <div class="progress-bar bg-success" role="progressbar" style="width: 25%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
                             </div>
                         </div>
-                        <div class="col-2 p-0">
-                            <div>100k</div>
-                        </div>
+                        <div class="col-2 p-0 totalNumber">100k</div>
                     </div>
                     <div><p>30310</p></div>
                 </div>
