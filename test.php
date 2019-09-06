@@ -18,26 +18,29 @@
     $ReportedHabit = 0;
     $InARow = 10;
 
-    function get_challenge_data(&$Progress, &$CommunityProgress, &$Percentage)
-    {
-        $Progress++;
-        $CommunityProgress++;
+    // function get_challenge_data(&$Progress, &$CommunityProgress, &$Percentage)
+    // {
+    //     $Progress++;
+    //     $CommunityProgress++;
 
-        if ($Progress > 50)
-        {
-            $Percentage = 80;
-        }
-    }
+    //     if ($Progress > 50)
+    //     {
+    //         $Percentage = 80;
+    //     }
+    // }
 
     function add_challenge_watched_video($Email, &$Progress)
     {
         $Progress++;
-        return $Progress;
+        return [$Progress,$CommunityProgress,$Percentage];
     }
 
-    function add_challenge_habit($Email, &$Progress)
+    function add_challenge_habit($Email, &$Progress, $ReportedHabit)
     {
         $Progress++;
+        // update $ReportedHabit value
+        $InARow++;
+        return [$Progress,$CommunityProgress,$Percentage,$InARow];
     }
 ?>
 
@@ -61,16 +64,16 @@
     <div class="section-head">
         <div class="row">
             <div class="colStyle col-6 col-lg-3 pl-0">
-                <div class="grid p-2">
-                    <div class="nameOfUser"><p><?php echo $Name ?></p></div>
+                <div class="grid p-3">
+                    <div class="partTitle"><p><?php echo $Name ?></p></div>
                     <div class="progessNumber"><p><?php echo $Progress ?></p></div>
                     <div class="videoBtn none"><button type="button" class="btn btn-light">Ya Vi el Video</button></div>
                     
                 </div>
             </div>
             <div class="colStyle col-6 col-lg-3 p-0 pr-lg-3">            
-                <div class="grid p-2">
-                    <div><p>TU HABITO</p></div>
+                <div class="grid p-3">
+                    <div class="partTitle"><p>TU HABITO</p></div>
                     <div class="radioBtn">
                         <div>
                         <!-- <div><input id="1a1" type="radio" name="habit" value="1a1"><label for="1a1">1 a 1</label></div> -->
@@ -78,13 +81,13 @@
                         <!-- <div><input id="Eleccion" type="radio" name="habit" value="Eleccion"><label for="Eleccion">Eleccion</label> </div> -->
                         
                             <div class="radio-1a1">
-                            <label><input type="radio" name="habit" value="1a1"> 1 a 1</label>
+                            <label><input type="radio" name="habit" value="1a1">1 a 1</label>
                             </div>
                             <div class="radio-Calma">
-                            <label><input type="radio" name="habit" value="Calma"> Calma</label>
+                            <label><input type="radio" name="habit" value="Calma">Calma</label>
                             </div>
                             <div class="radio-Eleccion">
-                            <label><input type="radio" name="habit" value="Eleccion"> Eleccion</label>
+                            <label><input type="radio" name="habit" value="Eleccion">Eleccion</label>
                             </div>
                         </div>
                     </div>
@@ -95,8 +98,8 @@
             <div class="w-100 d-lg-none row-space"></div>
 
             <div class="colStyle col-6 col-lg-3 pl-0">            
-                <div class="grid p-2">
-                    <div><p>TU POSICION</p></div>
+                <div class="grid p-3">
+                    <div class="partTitle"><p>TU POSICION</p></div>
                     <div class="percNumber"><p><?php echo $Percentage, '%' ?></p></div>
                     <div class="smileGroup">
                         <div class="smile"><img src="./img/section-img/smile-regular.svg"></div>
@@ -106,7 +109,7 @@
                 </div>
             </div>
             <div class="colStyle col-6 col-lg-3 p-0">            
-                <div class="grid p-2">
+                <div class="grid p-3">
                     <div class="progHead">
                         <div class="progTitle"><p>NUESTRA META</p></div>
                         <div class="questionMark"><a href="" target="_blank"><img src="./img/section-img/question-circle-regular.svg"></a></div>
