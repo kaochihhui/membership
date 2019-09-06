@@ -73,12 +73,22 @@
                     <div><p>TU HABITO</p></div>
                     <div class="radioBtn">
                         <div>
-                        <div><input id="1a1" type="radio" name="habit" value="1a1"><label for="1a1">1 a 1</label></div>
-                        <div><input id="Calma" type="radio" name="habit" value="Calma"><label for="Calma">Calma</label></div>
-                        <div><input id="Eleccion" type="radio" name="habit" value="Eleccion"><label for="Eleccion">Eleccion</label> </div>
+                        <!-- <div><input id="1a1" type="radio" name="habit" value="1a1"><label for="1a1">1 a 1</label></div> -->
+                        <!-- <div><input id="Calma" type="radio" name="habit" value="Calma"><label for="Calma">Calma</label></div> -->
+                        <!-- <div><input id="Eleccion" type="radio" name="habit" value="Eleccion"><label for="Eleccion">Eleccion</label> </div> -->
+                        
+                            <div class="radio-1a1">
+                            <label><input type="radio" name="habit" value="1a1"> 1 a 1</label>
+                            </div>
+                            <div class="radio-Calma">
+                            <label><input type="radio" name="habit" value="Calma"> Calma</label>
+                            </div>
+                            <div class="radio-Eleccion">
+                            <label><input type="radio" name="habit" value="Eleccion"> Eleccion</label>
+                            </div>
                         </div>
                     </div>
-                    <div class="DaysInARow none"><p><span>DaysInARow</span><span class="DaysInARowNumber"><?php echo $InARow ?></span></p></div>
+                    <div class="DaysInARow none"><p><span>DaysInARow</span><span class="DaysInARowNumber"> <?php echo $InARow ?></span></p></div>
                 </div>
             </div>
 
@@ -163,10 +173,13 @@
 
         $("input[name='habit']").click(()=>{
             $(".DaysInARow").removeClass("none")
+            let selectedValue= $("input[name='habit']:checked").val()
+            console.log(selectedValue)
+            $('div[class^="radio-"]:not(.radio-'+selectedValue+')').addClass("none")
             // console.log($("input[name='habit']:checked").val())
-            $("input[name='habit']").each(() =>{
+            // $("input[name='habit']").each(() =>{
                 // console.log($(this))
-            })
+            // })
         })
 
         ///////////////////////////////////////////////////////////////////////////
