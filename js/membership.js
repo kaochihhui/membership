@@ -11,12 +11,12 @@ let membership = [
     { DaysInARow: 3}
 ]
 
-$('.nameOfUser p').html(membership[0].Name);
-$('.progessNumber p').html(membership[1].Progress);
-$('.percNumber p').html(membership[2].Percentage + '%');
-$('.commNumber p').html(membership[3].CommunityProgress);
-$('.totalNumber').html(membership[4].Goal/1000 + 'k');
-$(".DaysInARowNumber").html(membership[7].DaysInARow);
+// $('.nameOfUser p').html(membership[0].Name);
+// $('.progessNumber p').html(membership[1].Progress);
+// $('.percNumber p').html(membership[2].Percentage + '%');
+// $('.commNumber p').html(membership[3].CommunityProgress);
+// $('.totalNumber').html(membership[4].Goal/1000 + 'k');
+// $(".DaysInARowNumber").html(membership[7].DaysInARow);
 
 
 ////////////////////////////// "Tu Progreso" //////////////////////////////
