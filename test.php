@@ -32,6 +32,7 @@
     function add_challenge_watched_video($Email, &$Progress)
     {
         $Progress++;
+        return $Progress;
     }
 
     function add_challenge_habit($Email, &$Progress)
@@ -50,6 +51,7 @@
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.2/animate.min.css">
     <link rel="stylesheet" href="./css/style.css">
     <link rel="stylesheet" href="./css/section-style.css">
     <title>MembershipWebsite</title>
@@ -104,11 +106,13 @@
                         <div class="col-8">
                             <div class="progress">
                                 <div class="progress-bar bg-success" role="progressbar" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+                                <div class="justify-content-center d-flex position-absolute w-100 progress-value"></div>
                             </div>
+                            <div class="commNumber"><p><?php echo $CommunityProgress ?></p></div>
                         </div>
                         <div class="col-2 p-0 totalNumber"><?php echo $Goal/1000, 'k' ?></div>
                     </div>
-                    <div class="commNumber"><p><?php echo $CommunityProgress ?></p></div>
+                    
                 </div>
             </div>
         </div>
@@ -125,7 +129,7 @@
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-    <script src="./js/membership.js"></script>
+    <!-- <script src="./js/membership.js"></script> -->
     <script> 
     let Email = "<?php echo $Email ?>",
         name = "<?php echo $Name ?>",
@@ -140,7 +144,7 @@
         ////////////////////////////// "Tu Progreso" //////////////////////////////
 
         // video button only be shown when ReportedVideo is false 
-        if (ReportedVideo) $('.videoBtn').removeClass('none');
+        if (!ReportedVideo) $('.videoBtn').removeClass('none');
 
         // after video button being clicked
         $('.videoBtn').click(()=>{
@@ -148,7 +152,7 @@
             $('.videoBtn').addClass('none'); // hide video button
             Progress = <?php echo add_challenge_watched_video($Email,$Progress);?> // progress number increase 1
             $('.progessNumber p').html(Progress); // animation
-            // $(".progessNumber p").animate({zoom: '150%'}, "slow");
+            $('.progessNumber p').addClass('animated heartBeat');
         });
 
         ///////////////////////////////////////////////////////////////////////////
@@ -184,7 +188,8 @@
 
         // progress bar percentage 
         let progPerct = CommunityProgress/Goal*100;
-        $(".progress-bar").width(progPerct+'%')
+        $(".progress-bar").width(progPerct+'%');
+        $(".progress-value").html(progPerct.toFixed(2)+' %');
 
         ///////////////////////////////////////////////////////////////////////////
 

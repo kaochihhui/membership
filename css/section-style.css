@@ -40,6 +40,15 @@
 .progBar{
     justify-content: center;
 }
+.progress{
+    height: 20px;
+    position: relative;
+}
+.progress-value{
+    color: #333;
+    font-weight: bold;
+    align-self: center;
+}
 .questionMark img{
     width: 30px;
     /* position: absolute;
@@ -72,6 +81,11 @@
 .smileOpacity{
     opacity: 0.4;
 }
+.commNumber{
+    margin-top: 5px;
+}
+
+
 @media (min-width: 576px) { 
     .progTitle{
         margin-right: 10px;
