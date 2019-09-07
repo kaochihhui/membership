@@ -29,18 +29,22 @@
     //     }
     // }
 
-    function add_challenge_watched_video($Email, &$Progress)
+    function add_challenge_watched_video($Email, &$Progress, $CommunityProgress, $Percentage)
     {
         $Progress++;
-        return [$Progress,$CommunityProgress,$Percentage];
+        $CommunityProgress++; // test if CommunityProgress updated
+        $Percentage++; // test if Percentage updated
+        return array ($Progress,$CommunityProgress,$Percentage);
     }
 
-    function add_challenge_habit($Email, &$Progress, $ReportedHabit)
+    function add_challenge_habit($Email, &$Progress, &$InARow, &$ReportedHabit, $CommunityProgress, $Percentage)
     {
         $Progress++;
-        // update $ReportedHabit value
         $InARow++;
-        return [$Progress,$CommunityProgress,$Percentage,$InARow];
+        $CommunityProgress++; // test if CommunityProgress updated
+        $Percentage++; // test if Percentage updated
+        // update $ReportedHabit value after selecting from the radio button
+        return array ($Progress,$InARow,$CommunityProgress,$Percentage);
     }
 ?>
 
@@ -67,7 +71,7 @@
                 <div class="grid p-3">
                     <div class="partTitle"><p><?php echo $Name ?></p></div>
                     <div class="progessNumber"><p><?php echo $Progress ?></p></div>
-                    <div class="videoBtn none"><button type="button" class="btn btn-light">Ya Vi el Video</button></div>
+                    <div class="videoBtn animated pulse infinite faster"><button type="button" class="btn btn-light">Ya Vi el Video</button></div>
                     
                 </div>
             </div>
@@ -80,18 +84,18 @@
                         <!-- <div><input id="Calma" type="radio" name="habit" value="Calma"><label for="Calma">Calma</label></div> -->
                         <!-- <div><input id="Eleccion" type="radio" name="habit" value="Eleccion"><label for="Eleccion">Eleccion</label> </div> -->
                         
-                            <div class="radio-1a1">
+                            <div class="radio-1a1 none">
                             <label><input type="radio" name="habit" value="1a1">1 a 1</label>
                             </div>
-                            <div class="radio-Calma">
+                            <div class="radio-Calma none">
                             <label><input type="radio" name="habit" value="Calma">Calma</label>
                             </div>
-                            <div class="radio-Eleccion">
+                            <div class="radio-Eleccion none">
                             <label><input type="radio" name="habit" value="Eleccion">Eleccion</label>
                             </div>
                         </div>
                     </div>
-                    <div class="DaysInARow none"><p><span>DaysInARow</span><span class="DaysInARowNumber"> <?php echo $InARow ?></span></p></div>
+                    <div class="DaysInARow none"><p><span>DaysInARow</span><span class="DaysInARowNumber"><?php echo $InARow ?></span></p></div>
                 </div>
             </div>
 
@@ -154,6 +158,25 @@
         ReportedHabit = <?php echo $ReportedHabit ?>,
         InARow = <?php echo $InARow ?>;
 
+    let ReportedHabitArray = ['1a1', 'Calma', 'Eleccion']
+
+
+        ////////////////////////////// After page load //////////////////////////////
+        
+        if(ReportedHabit > 0){ // get ReportedHabit from DB
+            let selectedRadioBtn = ReportedHabitArray[ReportedHabit-1]; 
+            $('div[class^="radio-"]').removeClass("none");
+            $('div[class^="radio-"]:not(.radio-'+selectedRadioBtn+')').addClass("none");
+            $('.radio-'+selectedRadioBtn).find('input').prop( "checked", true );
+            $('.radio-'+selectedRadioBtn).find('input').prop( "disabled", true );
+            
+            $('.DaysInARowNumber').html(InARow); // get DaysInARow from DB
+            $(".DaysInARow").removeClass("none");
+        }
+        else $('div[class^="radio-"]').removeClass("none");        
+        
+        ///////////////////////////////////////////////////////////////////////////
+
         ////////////////////////////// "Tu Progreso" //////////////////////////////
 
         // video button only be shown when ReportedVideo is false 
@@ -163,9 +186,25 @@
         $('.videoBtn').click(()=>{
             $ReportedVideo = true;
             $('.videoBtn').addClass('none'); // hide video button
-            Progress = <?php echo add_challenge_watched_video($Email,$Progress);?> // progress number increase 1
-            $('.progessNumber p').html(Progress); // animation
-            $('.progessNumber p').addClass('animated heartBeat');
+
+            // Progress value increases 1
+            let tmpArray = <?php echo json_encode(add_challenge_watched_video($Email,$Progress, $CommunityProgress, $Percentage)) ?> 
+            Progress = tmpArray[0];
+            $('.progessNumber p').html(Progress); 
+            $('.progessNumber p').addClass('animated heartBeat slower'); // animation
+
+            // update CommunityProgress value from DB
+            CommunityProgress = tmpArray[1];
+            $('.commNumber p').html(CommunityProgress); 
+            $('.commNumber p').addClass('animated heartBeat slower'); // animation
+
+            // progress bar percentage 
+            updateProgBarPerc(CommunityProgress,Goal)
+            
+            // update Percentage value from DB
+            Percentage = tmpArray[2];
+            $('.percNumber p').html(Percentage); 
+            $('.percNumber p').addClass('animated heartBeat slower'); // animation
         });
 
         ///////////////////////////////////////////////////////////////////////////
@@ -175,14 +214,41 @@
 
 
         $("input[name='habit']").click(()=>{
-            $(".DaysInARow").removeClass("none")
-            let selectedValue= $("input[name='habit']:checked").val()
+            
+            // hide those unchecked radio buttons
+            let selectedValue= $("input[name='habit']:checked").val();
             console.log(selectedValue)
-            $('div[class^="radio-"]:not(.radio-'+selectedValue+')').addClass("none")
-            // console.log($("input[name='habit']:checked").val())
-            // $("input[name='habit']").each(() =>{
-                // console.log($(this))
-            // })
+            $('div[class^="radio-"]:not(.radio-'+selectedValue+')').addClass("none");
+
+            // update ReportedHabit value
+            if(selectedValue == '1a1') ReportedHabit = 1;
+            else if(selectedValue == 'Calma') ReportedHabit = 2;
+            else if(selectedValue == 'Eleccion') ReportedHabit = 3;
+
+            let tmpArray = <?php echo json_encode(add_challenge_habit($Email, $Progress, $InARow, $ReportedHabit, $CommunityProgress, $Percentage)) ?> 
+            
+            // update Progress value
+            Progress = tmpArray[0];
+            $('.progessNumber p').html(Progress); 
+            $('.progessNumber p').addClass('animated heartBeat slower'); // animation
+
+            // update DaysInARow value
+            InARow = tmpArray[1];
+            $('.DaysInARowNumber').html(InARow);
+            $(".DaysInARow").removeClass("none");
+
+            // update CommunityProgress value from DB
+            CommunityProgress = tmpArray[2];
+            $('.commNumber p').html(CommunityProgress); 
+            $('.commNumber p').addClass('animated heartBeat slower'); // animation
+
+            // progress bar percentage 
+            updateProgBarPerc(CommunityProgress,Goal)
+            
+            // update Percentage value from DB
+            Percentage = tmpArray[3];
+            $('.percNumber p').html(Percentage); 
+            $('.percNumber p').addClass('animated heartBeat slower'); // animation
         })
 
         ///////////////////////////////////////////////////////////////////////////
@@ -193,22 +259,25 @@
 
         if(Percentage > -1 && Percentage < 20) $("#smile2, #smile3").addClass("smileOpacity")
         else if(Percentage > 21 && Percentage < 80) {
-            $("#smile2").removeClass("smileOpacity")
-            $("#smile3").addClass("smileOpacity")
+            $("#smile2").removeClass("smileOpacity");
+            $("#smile3").addClass("smileOpacity");
         }
-        else $("#smile2, #smile3").removeClass("smileOpacity")
+        else $("#smile2, #smile3").removeClass("smileOpacity");
 
         ///////////////////////////////////////////////////////////////////////////
 
         ////////////////////////////// "La Meta" //////////////////////////////
 
         // progress bar percentage 
-        let progPerct = CommunityProgress/Goal*100;
-        $(".progress-bar").width(progPerct+'%');
-        $(".progress-value").html(progPerct.toFixed(2)+' %');
+        updateProgBarPerc(CommunityProgress,Goal)
 
         ///////////////////////////////////////////////////////////////////////////
 
+        function updateProgBarPerc(CommunityProgress,Goal){
+            let progPerct = CommunityProgress/Goal*100;
+            $(".progress-bar").width(progPerct+'%');
+            $(".progress-value").html(progPerct.toFixed(2)+' %');
+        }
     </script>
   </body>
 </html>

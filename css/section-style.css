@@ -99,7 +99,9 @@
 .commNumber{
     margin-top: 5px;
 }
-
+.DaysInARowNumber{
+    margin-left: 5px;
+}
 
 @media (min-width: 576px) { 
     .progTitle{
