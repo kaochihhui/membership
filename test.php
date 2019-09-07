@@ -181,10 +181,11 @@
 
         // video button only be shown when ReportedVideo is false 
         if (!ReportedVideo) $('.videoBtn').removeClass('none');
+        else $('.videoBtn').addClass('none');
 
         // after video button being clicked
         $('.videoBtn').click(()=>{
-            $ReportedVideo = true;
+            ReportedVideo = true;
             $('.videoBtn').addClass('none'); // hide video button
 
             // Progress value increases 1
@@ -203,7 +204,7 @@
             
             // update Percentage value from DB
             Percentage = tmpArray[2];
-            $('.percNumber p').html(Percentage); 
+            $('.percNumber p').html(Percentage+'%'); 
             $('.percNumber p').addClass('animated heartBeat slower'); // animation
         });
 
@@ -247,7 +248,7 @@
             
             // update Percentage value from DB
             Percentage = tmpArray[3];
-            $('.percNumber p').html(Percentage); 
+            $('.percNumber p').html(Percentage+'%'); 
             $('.percNumber p').addClass('animated heartBeat slower'); // animation
         })
 
