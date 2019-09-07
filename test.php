@@ -11,7 +11,7 @@
     $Email = "diegodepalacio@gmail.com";
     $Name = "Diego";
     $Progress = 42;
-    $Percentage = 81;
+    $Percentage = 19;
     $CommunityProgress = 30310;
     $Goal = 100000;
     $ReportedVideo = false;
@@ -205,7 +205,8 @@
             // update Percentage value from DB
             Percentage = tmpArray[2];
             $('.percNumber p').html(Percentage+'%'); 
-            $('.percNumber p').addClass('animated heartBeat slower'); // animation
+            if (Percentage == 21 || Percentage == 81 ) $('.percNumber p').addClass('animated heartBeat slower'); // animation
+            smilyFaces(Percentage)
         });
 
         ///////////////////////////////////////////////////////////////////////////
@@ -249,24 +250,16 @@
             // update Percentage value from DB
             Percentage = tmpArray[3];
             $('.percNumber p').html(Percentage+'%'); 
-            $('.percNumber p').addClass('animated heartBeat slower'); // animation
+            if (Percentage == 21 || Percentage == 81 ) $('.percNumber p').addClass('animated heartBeat slower'); // animation
+            smilyFaces(Percentage)
         })
 
         ///////////////////////////////////////////////////////////////////////////
 
         ////////////////////////////// "Tu Posición" //////////////////////////////
 
-        // smile face's opacity changed by the percentage 
-        // 1 to 20 => 1 smile face 
-        // 21 to 80 => 2 smile faces
-        // 81 to 100 => 3 smile faces
-
-        if(Percentage > -1 && Percentage < 21) $("#smile2, #smile3").addClass("smileOpacity")
-        else if(Percentage > 20 && Percentage < 81) {
-            $("#smile2").removeClass("smileOpacity");
-            $("#smile3").addClass("smileOpacity");
-        }
-        else $("#smile2, #smile3").removeClass("smileOpacity");
+        // smile face's opacity changed by the percentage
+        smilyFaces(Percentage)
 
         ///////////////////////////////////////////////////////////////////////////
 
@@ -281,6 +274,20 @@
             let progPerct = CommunityProgress/Goal*100;
             $(".progress-bar").width(progPerct+'%');
             $(".progress-value").html(progPerct.toFixed(2)+' %');
+        }
+
+        function smilyFaces(Percentage){ 
+            // 1 to 20 => 1 smile face 
+            // 21 to 80 => 2 smile faces
+            // 81 to 100 => 3 smile faces
+
+            if(Percentage > -1 && Percentage < 21) $("#smile2, #smile3").addClass("smileOpacity")
+            else if(Percentage > 20 && Percentage < 81) {
+                $("#smile2").removeClass("smileOpacity");
+                $("#smile3").addClass("smileOpacity");
+            }
+            else $("#smile2, #smile3").removeClass("smileOpacity");
+
         }
     </script>
   </body>
